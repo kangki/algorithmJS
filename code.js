@@ -1,9 +1,10 @@
 /* algorithm on nodejs */
-console.log([
+var h = require('./printHead');
+h.out([
 	'-------------------',
 	' algorithmJS in nodejs ',
 	' kangki ',
 	' 2014.09.18 ',
 	'-------------------'
-].join('\n'));
+]);
 

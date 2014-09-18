@@ -1,14 +1,11 @@
 /* UTIL */
-module.exports = {
-	typename : function (o){
-		return Object.prototype.toString.call(o);
+module.exports = 
+util = {
+	ofn : Object.prototype,
+	fnString : function (o){
+		return this.ofn.toString.call(o);
 	},
-
 	isArray : function (o){
-		return this.typename(o) === '[object Array]';
+		return this.fnString(o) === '[object Array]';
 	}
-
 };
-
-
-// console.log(typename([]), isArray([]));

@@ -53,4 +53,4 @@ function List(){
 	this.prev = function(){ pos--; };
 	this.next = function(){ pos++; };
 	this.end = function(){ pos = this.size()-1; };
-}
+};

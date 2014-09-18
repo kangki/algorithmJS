@@ -2,6 +2,7 @@
 var log = require('./log');
 var List = require('./List');
 var Stack = require('./Stack');
+var Queue = require('./Queue');
 
 function head(v){ log.h(v); }
 function print(v,m){
@@ -44,8 +45,7 @@ var b = roundLetter('ababa'); print(b, 'roundLetter("ababa")');
 
 head(['수열함수']);
 function factorial(n){
-	if(n == 1) return 1;
-	return n * factorial(n-1);
+	return n==1 ? 1 : (n * factorial(n-1));
 }
 function factorial2(n){
 	var s = new Stack(), r=1;
@@ -59,6 +59,59 @@ function factorial2(n){
 }
 var d = factorial(5); print(d, 'factorial(5)'),
 	d = factorial2(5); print(d, 'factorial2(5)');
+
+head(['100 미만의 숫자 기수정렬함수']);
+function radixSort(data){
+	function collect(src, dst){
+		var p=0, i=0, n=src.length, q;
+		while(i<n){
+			q = src[i++];
+			while(!q.empty()){
+				dst[p++] = q.dequeue();
+			}
+		}
+	}
+
+	function distribute(src, dst, digit){
+		var i=0, n=src.length, v, p, q;
+		for(; i<n; i++){
+			v = src[i];
+			if(digit == 1){
+				p = v%10;
+			} else {
+				p = Math.floor(v/10);
+			}
+			q = dst[p];
+			q.enqueue(v);
+		}
+	}
+
+	var qlist = [], i=0;
+	while(i<10){
+		qlist[i++] = new Queue();
+	}
+
+	distribute(data, qlist, 1);
+	collect(qlist, data);
+
+	distribute(data, qlist, 10);
+	collect(qlist, data);
+
+	return data;
+}
+var l = radixSort([22,41,33,11,12,45,89,19]);	
+print(l, 'radixSort([22,41,33,11,12,45,89,19])');
+
+;(function(){
+head(['-- Demo Queue(S) --']);
+
+var q = new Queue();	print(q, 'create queue');
+q.enqueue(1);			print(q, 'enqueue(1)');
+q.enqueue(2);			print(q, 'enqueue(2)');
+var v = q.dequeue();	print(q, 'dequeue()='+v);
+
+head(['-- Demo Queue(E) --']);
+})();
 
 ;(function(){
 head(['-- Demo Stack(S) --']);

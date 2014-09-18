@@ -5,6 +5,8 @@ var Stack = require('./Stack');
 var Queue = require('./Queue');
 var LList = require('./LList');
 var DLList = require('./DLList');
+var Dic = require('./Dic');
+var HashTable = require('./HashTable');
 
 function head(v){ log.h(v); }
 function print(v,m){ log.print('  ', v.toString(), m ? '<<---'+m : ''); }
@@ -124,6 +126,57 @@ print(
 );
 
 ;(function(){
+	head(['-- Demo HashTable(S) --']);
+
+	var datas = ['kim', 'lee', 'kang', 'park', 'hong', 'abc', 'cba'];
+	var ht = new HashTable();
+	print(ht, 'create HashTable');
+
+	for(var i=0,l=datas.length; i<l; i++){
+		ht.put(datas[i]);
+		print(ht, 'put('+datas[i]+')');
+	}
+
+	ht.clear();
+	print(ht, 'clear()');
+
+	ht.toggleHash();
+	for(var i=0,l=datas.length; i<l; i++){
+		ht.put(datas[i]);
+		print(ht, 'put('+datas[i]+')');
+	}
+
+	head(['-- Demo HashTable(E) --']);
+})();
+
+;(function(){
+	head(['-- Demo Dictionary(S) --']);
+
+	var dic = new Dic();
+	print(dic, 'create Dic');
+
+	dic.put('a','va');
+	print(dic, 'put("a","va")');
+
+	dic.put('b','vb');
+	print(dic, 'put("b","vb")');
+
+	dic.put('c','vc');
+	print(dic, 'put("c","vc")');
+
+	var c = dic.count();
+	print(dic, 'count()='+c);
+
+	dic.remove('c');
+	print(dic, 'remove("c")');
+
+	var v = dic.get('b');
+	print(dic, 'get("b")='+v);
+
+	head(['-- Demo Dictionary(E) --']);
+})//();
+
+;(function(){
 	head(['-- Demo DLList(S) --']);
 
 	var dll = new DLList();
@@ -146,7 +199,7 @@ print(
 
 
 	head(['-- Demo DLList(E) --']);
-})();
+})//();
 
 ;(function(){
 	head(['-- Demo LList(S) --']);

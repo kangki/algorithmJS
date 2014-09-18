@@ -3,6 +3,7 @@ var log = require('./log');
 var List = require('./List');
 var Stack = require('./Stack');
 var Queue = require('./Queue');
+var LList = require('./LList');
 
 function head(v){ log.h(v); }
 function print(v,m){
@@ -103,6 +104,19 @@ var l = radixSort([22,41,33,11,12,45,89,19]);
 print(l, 'radixSort([22,41,33,11,12,45,89,19])');
 
 ;(function(){
+head(['-- Demo LList(S) --']);
+
+var ll = new LList();		console.log(ll.toString());
+ll.insert('kim', ll.HEAD); 	console.log(ll.toString());
+ll.insert('kang', 'kim');	console.log(ll.toString());
+ll.insert('hong', 'kang');	console.log(ll.toString());
+ll.insert('ki', 'kang');	console.log(ll.toString());
+ll.remove('ki');			console.log(ll.toString());
+
+head(['-- Demo LList(E) --']);
+})//();
+
+;(function(){
 head(['-- Demo Queue(S) --']);
 
 var q = new Queue();	print(q, 'create queue');
@@ -111,7 +125,7 @@ q.enqueue(2);			print(q, 'enqueue(2)');
 var v = q.dequeue();	print(q, 'dequeue()='+v);
 
 head(['-- Demo Queue(E) --']);
-})();
+})//();
 
 ;(function(){
 head(['-- Demo Stack(S) --']);

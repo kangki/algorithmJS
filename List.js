@@ -48,7 +48,7 @@ function List(){
 
 	// List : Search
 	var pos = 0;
-	this.current = function(){ return pos; };
+	this.curr = function(){ return pos; };
 	this.font = function(){ pos = 0; };
 	this.prev = function(){ pos--; };
 	this.next = function(){ pos++; };

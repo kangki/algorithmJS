@@ -4,6 +4,7 @@ var List = require('./List');
 var Stack = require('./Stack');
 var Queue = require('./Queue');
 var LList = require('./LList');
+var DLList = require('./DLList');
 
 function head(v){ log.h(v); }
 function print(v,m){ log.print('  ', v.toString(), m ? '<<---'+m : ''); }
@@ -121,6 +122,31 @@ print(
 	radixSort([22,41,33,11,12,45,89,19]),
 	'radixSort([22,41,33,11,12,45,89,19])'
 );
+
+;(function(){
+	head(['-- Demo DLList(S) --']);
+
+	var dll = new DLList();
+	print(dll, 'create DLList');
+
+	dll.insert('kim', dll.HEAD);
+	print(dll,'insert("kim", ll.HEAD)');
+
+	dll.insert('kang', 'kim');
+	print(dll,'insert("kang","kim")');
+
+	dll.insert('hong', 'kang');
+	print(dll,'insert("hong","kang")');
+
+	dll.insert('ki', 'kang');
+	print(dll,'insert("ki","kang")');
+
+	dll.remove('ki');
+	print(dll,'remove("ki")');
+
+
+	head(['-- Demo DLList(E) --']);
+})();
 
 ;(function(){
 	head(['-- Demo LList(S) --']);

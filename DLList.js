@@ -1,24 +1,15 @@
-/* Linked List */
-module.exports =
-LList = 
-function LList(){
+/* Double Linked List */
+module.exports = 
+DLList = 
+function DLList(){
 	this.Node = Node = function Node(data){
 		this.data = data;
+		this.prev = null;
 		this.next = null;
 	};
 
 	var head = new Node(HEAD={});
 	this.HEAD = head.data;
-
-	function prev(item){
-		var node = head;
-		var pv = node;
-		while(node.data != item){
-			pv = node;
-			node = node.next;
-		}
-		return pv;
-	}
 
 	function find(item){
 		var node = head;
@@ -31,15 +22,24 @@ function LList(){
 	this.insert = function(data, item){
 		var node = new Node(data);
 		var curr = find(item);
+
+		node.prev = curr;
 		node.next = curr.next;
+
+		if(curr.next) 
+			curr.next.prev = node;
 		curr.next = node;
 	};
 	this.remove = function(item){
-		var pv = prev(item);
-		var curr = pv.next;
-		pv.next = curr.next;
-		curr.next = null;
-		delete curr;
+		var node = find(item);
+
+		node.prev.next = node.next;
+		if(node.next) 
+			node.next.prev = node.prev;
+
+		node.prev = null;
+		node.next = null;
+		delete node;
 	};
 	this.toString = function(){
 		var m=[], node = head.next;
@@ -48,5 +48,5 @@ function LList(){
 			node = node.next;
 		}
 		return m;
-	};
+	}
 };

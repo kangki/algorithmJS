@@ -2,14 +2,13 @@
 module.exports = 
 HashTable = 
 function HashTable(){
-	var store, hash, type;
+	var store, hash;
 
 	init();
 
 	function init(){
 		store = new Array(137);
 		hash = simpleHash;
-		type = 'D';
 	};
 
 	function simpleHash(data){
@@ -28,13 +27,11 @@ function HashTable(){
 		return h%store.length;
 	}
 
-	this.buildChains = function(){
-		init();
-		type = 'C';
-		var i=0, l=store.length;
-		for(; i<l; i++){
-			store[i] = [];
-		}
+	this.put = function(data){
+		store[hash(data)] = data;
+	};
+	this.get = function(key){
+		return store[hash(key)];
 	};
 
 	this.clear = function(){
@@ -44,13 +41,6 @@ function HashTable(){
 	this.toggleHash = function(){
 		hash = (hash == simpleHash) ? butterHash : simpleHash;
 	}
-
-	this.put = function(data){
-		store[hash(data)] = data;
-	};
-	this.get = function(key){
-		return store[hash(key)];
-	};
 
 	this.toString = function(){
 		var i=0, l=store.length, m=[];

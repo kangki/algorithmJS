@@ -18,6 +18,7 @@ var LList 		= lib('LList');
 var DLList 		= lib('DLList');
 var Dic 			= lib('Dic');
 var HashTable = lib('HashTable');
+var BST				= lib('BST');
 
 head(['-----------------------',
 			' algorithmJS in nodejs ',
@@ -134,6 +135,21 @@ print(
 );
 
 ;(function(){
+	head(['-- Demo Binary Search Tree(S) --']);
+
+	var bst = new BST();
+	bst.insert(8);
+	bst.insert(1);
+	bst.insert(4);
+	bst.insert(3);
+	bst.insert(9);
+	bst.insert(2);	
+	print(bst, 'create BST');
+
+	head(['-- Demo Binary Search Tree(E) --']);
+})();
+
+;(function(){
 	head(['-- Demo HashTable(S) --']);
 
 	var datas = ['kim', 'lee', 'kang', 'park', 'hong', 'abc', 'cba'];
@@ -155,7 +171,7 @@ print(
 	}
 
 	head(['-- Demo HashTable(E) --']);
-})();
+})//();
 
 ;(function(){
 	head(['-- Demo Dictionary(S) --']);

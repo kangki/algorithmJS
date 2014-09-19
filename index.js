@@ -1,15 +1,23 @@
 /* algorithm on nodejs */
-var log = require('./log');
-var List = require('./List');
-var Stack = require('./Stack');
-var Queue = require('./Queue');
-var LList = require('./LList');
-var DLList = require('./DLList');
-var Dic = require('./Dic');
-var HashTable = require('./HashTable');
+function lib(name,root){
+	var uri = (root ? root : './source') + (name[0] != '/' ? '/'+name : name);
+	return require(uri);
+}
+function head(v){ 
+	log.h(v); 
+}
+function print(v,m){ 
+	log.print('  ', v.toString(), m ? '<<---'+m : ''); 
+}
 
-function head(v){ log.h(v); }
-function print(v,m){ log.print('  ', v.toString(), m ? '<<---'+m : ''); }
+var log 			= lib('log');
+var List 			= lib('List');
+var Stack 		= lib('Stack');
+var Queue 		= lib('Queue');
+var LList 		= lib('LList');
+var DLList 		= lib('DLList');
+var Dic 			= lib('Dic');
+var HashTable = lib('HashTable');
 
 head(['-----------------------',
 			' algorithmJS in nodejs ',

@@ -7,30 +7,36 @@
 <script type="text/javascript" src="lib/angular.min.js"></script>
 <script type="text/javascript" src="lib/angular-route.min.js"></script>
 <script type="text/javascript">
-var app = angular.module('app',[
-	'ngRoute','controllers'
+var app = angular.module('app',['ctrls','ngRoute']);
+app.config([
+	'$routeProvider', function($routeProvider,$locationProvider){
+		$routeProvider
+		.when('/main', 	{templateUrl:'main.html', 	controller:'RouteCtrl'})
+		.when('/stack', {templateUrl:'stack.html', 	controller:'RouteCtrl'})
+		.otherwise({redirectTo:'/main'});
+		$locationProvider.html5Mode(true);
+	}
 ]);
-app.config(['$routeProvider', function($routeProvider){
-	$routeProvider
-	.when('/main', 	{templateUrl:'main.html', controller:'RouteCtrl'})
-	.when('/stack', {templateUrl:'stack.html', controller:'RouteCtrl'})
-	.otherwise({redirectTo:'/main'});
-}]);
 
-var controllers = angular.module('controllers',[]);
+var ctrls = angular.module('ctrls',[]);
+ctrls.controller(
+	'RouteCtrl', ['$scope', function($scope,$route){
+			var slug = $route.current.templateUrl.replace('.html','');
+			$scope.$emit('routeLoaded', {slug:slug});
+		}
+	]);
 
-controllers.controller('RouteCtrl', ['$scope', '$http',function($scope,$http){
-
-}]);
-
-function RouteController($scope, $route){
-	var slug = $route.current.templateUrl.replace('.html','');
-	$scope.$emit('routeLoaded', {slug:slug});
-}
 </script>
 </head>
 
-<body ng-controller="AppController">
+<body>
+	<header>
+		<ul>
+			<li><a href="/#/main">main</a></li>
+			<li><a href="/#/stack">stack</a></li>
+		</ul>
+	</header>
+
 	<ng-view></ng-view>
 
 	<footer>

@@ -1,28 +1,30 @@
 /* Stack */
 module.exports =
-Stack = 
-function Stack(){
-	var store = [];
-	this.clear = function(){
-		store = [];
-	};
-	this.size = function(){
-		return store.length;
-	};
-	this.top = function(){
-		return this.size()-1;
-	};
-	this.push = function(data){
-		store.push(data);
-	};
-	this.pop = function(){
-		return store.pop();
-	};
-	this.peek = function(){
-		return store[this.top()];
-	};
+Stack = function Stack(){
+	this.clear = clear;
+	this.size = size;
+	this.pop = pop;
+	this.push = push;
+	this.get = get;
+	this.toString = toString;
 
-	this.toString = function(){
-		return store;
-	};
+	var store = [];
+	function clear(){
+		store = [];
+	}
+	function size(){
+		return store.length;
+	}
+	function pop(){
+		return store.pop();
+	}
+	function push(data){
+		store.push(data);
+	}
+	function get(){
+		return store[store.length];
+	}
+	function toString(){
+		return store.toString();
+	}
 };

@@ -1,6 +1,6 @@
 /* algorithm on nodejs */
 function lib(name,root){
-	var uri = (root ? root : './source') + (name[0] != '/' ? '/'+name : name);
+	var uri = (root ? root : './') + (name[0] != '/' ? '/'+name : name);
 	return require(uri);
 }
 function head(v){ 

@@ -6,41 +6,51 @@
 <title>Algorithm</title>
 <script type="text/javascript" src="lib/angular.min.js"></script>
 <script type="text/javascript" src="lib/angular-route.min.js"></script>
+
 <script type="text/javascript">
-var app = angular.module('app',['ctrls','ngRoute']);
-app.config([
-	'$routeProvider', function($routeProvider,$locationProvider){
+var app = angular.module('app',['ngRoute']);
+
+app.config(['$routeProvider', '$locationProvider', 
+	function($routeProvider, $locationProvider){
 		$routeProvider
-		.when('/main', 	{templateUrl:'main.html', 	controller:'RouteCtrl'})
-		.when('/stack', {templateUrl:'stack.html', 	controller:'RouteCtrl'})
-		.otherwise({redirectTo:'/main'});
+			.when('/main', 	{templateUrl:'main.html', 	controller:'RouteCtrl'})
+			.when('/stack', {templateUrl:'stack.html', 	controller:'RouteCtrl'})
+			.otherwise({redirectTo:'/main'});
+
 		$locationProvider.html5Mode(true);
 	}
 ]);
 
-var ctrls = angular.module('ctrls',[]);
-ctrls.controller(
-	'RouteCtrl', ['$scope', function($scope,$route){
-			var slug = $route.current.templateUrl.replace('.html','');
-			$scope.$emit('routeLoaded', {slug:slug});
-		}
-	]);
+app.controller('menuCtrl', ['$route', '$routeParams', '$location',
+	function($route, $routeParams, $location){
+		this.$route = $route;
+		this.$location = $location;
+		this.$routeParams = $routeParams;
+	}
+]);
+
+app.controller('RouteCtrl', ['$routeParams', function($routeParams){
+
+}]);
 
 </script>
 </head>
 
 <body>
-	<header>
+	<header ng-controller="menuCtrl">
 		<ul>
-			<li><a href="/#/main">main</a></li>
-			<li><a href="/#/stack">stack</a></li>
+			<li><a href="main">main</a></li>
+			<li><a href="stack">stack</a></li>
 		</ul>
 	</header>
 
-	<ng-view></ng-view>
+	<div ng-view></div>
 
 	<footer>
-		algorithm
+		<pre>$location.path() = {{main.$location.path()}}</pre>
+		<pre>$route.current.templateUrl = {{main.$route.current.templateUrl}}</pre>
+		<pre>$route.current.params = {{main.$route.current.params}}</pre>
+		<pre>$routeParams = {{main.$routeParams}}</pre>
 	</footer>
 </body>
 

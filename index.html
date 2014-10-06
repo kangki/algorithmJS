@@ -17,7 +17,7 @@ app.config(['$routeProvider', '$locationProvider',
 			.when('/stack', {templateUrl:'stack.html', 	controller:'RouteCtrl'})
 			.otherwise({redirectTo:'/main'});
 
-		$locationProvider.html5Mode(true);
+		$locationProvider.html5Mode(false);
 	}
 ]);
 

@@ -10,47 +10,42 @@
 <script type="text/javascript">
 var app = angular.module('app',['ngRoute']);
 
-app.config(['$routeProvider', '$locationProvider', 
-	function($routeProvider, $locationProvider){
-		$routeProvider
-			.when('/main', 	{templateUrl:'main.html', 	controller:'RouteCtrl'})
-			.when('/stack', {templateUrl:'stack.html', 	controller:'RouteCtrl'})
-			.otherwise({redirectTo:'/main'});
+app.config(function($routeProvider, $locationProvider){
+	$routeProvider
+		.when('/main', {templateUrl:'main.html', controller:'routeCtrl'})
+		.when('/stack', {templateUrl:'stack.html', controller:'routeCtrl'})
+		.otherwise({redirectTo:'/main.html'});
 
-		$locationProvider.html5Mode(false);
-	}
-]);
+	$locationProvider.html5Mode(false);
+});
 
-app.controller('menuCtrl', ['$route', '$routeParams', '$location',
-	function($route, $routeParams, $location){
-		this.$route = $route;
-		this.$location = $location;
-		this.$routeParams = $routeParams;
-	}
-]);
+app.controller('routeCtrl', function($scope){
+	
+});
 
-app.controller('RouteCtrl', ['$routeParams', function($routeParams){
-
-}]);
+app.controller('menuCtrl', function($scope, $route, $routeParams, $location){
+	this.$route = $route;
+	this.$location = $location;
+	this.$routeParams = $routeParams;
+});
 
 </script>
 </head>
-
-<body>
-	<header ng-controller="menuCtrl">
+<body ng-controller="menuCtrl as menu">
+	<header>
 		<ul>
-			<li><a href="main">main</a></li>
-			<li><a href="stack">stack</a></li>
+			<li><a href="#/main">main</a></li>
+			<li><a href="#/stack">stack</a></li>
 		</ul>
 	</header>
 
 	<div ng-view></div>
 
 	<footer>
-		<pre>$location.path() = {{main.$location.path()}}</pre>
-		<pre>$route.current.templateUrl = {{main.$route.current.templateUrl}}</pre>
-		<pre>$route.current.params = {{main.$route.current.params}}</pre>
-		<pre>$routeParams = {{main.$routeParams}}</pre>
+		<pre>$location.path() = {{menu.$location.path()}}</pre>
+		<pre>$route.current.templateUrl = {{menu.$route.current.templateUrl}}</pre>
+		<pre>$route.current.params = {{menu.$route.current.params}}</pre>
+		<pre>$routeParams = {{menu.$routeParams}}</pre>
 	</footer>
 </body>
 
